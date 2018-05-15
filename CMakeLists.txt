@@ -8,6 +8,6 @@ else()
     add_compile_options(-W -Wall)
 endif()
 
-add_library(shslib sha256.c sha1.c)
+add_library(shslib sha256.c sha1.c sha224.c)
 add_executable(tester tests.c)
 target_link_libraries(tester shslib)

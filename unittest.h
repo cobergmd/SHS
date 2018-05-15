@@ -31,7 +31,7 @@
 int tests_run = 0;
 static char *run_tests();
 
-int main(int argc, char **argv) {
+int main() {
   printf("Running Unit Tests...\n");
   char *result = run_tests();
   if (result != 0) {
