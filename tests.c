@@ -2,6 +2,21 @@
 #include "shs.h"
 #include "unittest.h"
 
+static char *test_sha1_nsit_test1()
+{
+  unsigned char nsit_tst1[] = {"abc"};
+  unsigned char nsit_hash[] = {0xa9,0x99,0x3e,0x36,
+                               0x47,0x06,0x81,0x6a,
+                               0xba,0x3e,0x25,0x71,
+                               0x78,0x50,0xc2,0x6c,
+                               0x9c,0xd0,0xd8,0x9d};
+  Sha1 *sha = sha1_new();
+  sha1_load(sha, nsit_tst1, strlen(nsit_tst1));
+  sha1_hash(sha);
+
+  test_true("NIST SHA-1 Test 1", !memcmp(sha->msg_digest, nsit_hash, 20));
+}
+
 static char *test_sha256_nsit_test1()
 {
   unsigned char nsit_tst1[] = {"abc"};
@@ -14,7 +29,7 @@ static char *test_sha256_nsit_test1()
   sha256_load(data, nsit_tst1, strlen(nsit_tst1));
   sha256_hash(data);
 
-  test_true("NIST Test 1", !memcmp(data->msg_digest, nsit_hash1, 32));
+  test_true("NIST SHA-256 Test 1", !memcmp(data->msg_digest, nsit_hash1, 32));
 
   for (int i = 0; i < 8; i++) {
     printf("%x", data->msg_digest[i]);
@@ -36,7 +51,7 @@ static char *test_sha256_nsit_test2()
   sha256_load(data, nsit_tst2, strlen(nsit_tst2));
   sha256_hash(data);
 
-  test_true("NIST Test 2", !memcmp(data->msg_digest, nsit_hash2, 32));
+  test_true("NIST SHA-256 Test 2", !memcmp(data->msg_digest, nsit_hash2, 32));
 
   for (int i = 0; i < 8; i++) {
     printf("%x", data->msg_digest[i]);
@@ -60,7 +75,7 @@ static char *test_sha256_nsit_test3()
   }
   sha256_hash(data);
 
-  test_true("NIST Test 3", !memcmp(data->msg_digest, nsit_hash3, 32));
+  test_true("NIST SHA-256 Test 3", !memcmp(data->msg_digest, nsit_hash3, 32));
 
   for (int i = 0; i < 8; i++) {
     printf("%x", data->msg_digest[i]);
@@ -71,6 +86,7 @@ static char *test_sha256_nsit_test3()
 }
 
 static char *run_tests() {
+  test_run(test_sha1_nsit_test1);
   test_run(test_sha256_nsit_test1);
   test_run(test_sha256_nsit_test2);
   test_run(test_sha256_nsit_test3);
