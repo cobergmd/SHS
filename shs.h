@@ -53,4 +53,20 @@ int sha224_load(Sha224 *sha, const unsigned char data[],
                 const unsigned int len);
 int sha224_hash(Sha224 *sha);
 
+/*------------------------------*/
+/* SHA-512                      */
+/*------------------------------*/
+typedef struct _Sha512 Sha512;
+struct _Sha512 {
+  unsigned char msg_block[128];  // 1024 bit block (8 bit bytes)
+  unsigned long long byte_idx;
+  unsigned long long bit_cnt[2];        // 128 bit
+  unsigned long long msg_digest[8];  // 512 bit digest (64 bit words)
+};
+
+Sha512 *sha512_new();
+int sha512_load(Sha512 *sha, const unsigned char data[],
+                const unsigned int len);
+int sha512_hash(Sha512 *sha);
+
 #endif /* _SHS_LIB_H_ */

@@ -60,7 +60,7 @@ static int compute_block(Sha256 *sha) {
     W[t] |= (sha->msg_block[t * 4 + 3]);
   }
 
-  for (int t = 16; t < BLOCK_SIZE; t++) {
+  for (int t = 16; t <= 63; t++) {
     W[t] = LSIG1(W[t - 2]) + W[t - 7] + LSIG0(W[t - 15]) + W[t - 16];
   }
 
@@ -75,7 +75,7 @@ static int compute_block(Sha256 *sha) {
   var_h = sha->msg_digest[7];
 
   // do the math
-  for (int t = 0; t < BLOCK_SIZE; t++) {
+  for (int t = 0; t <= 63; t++) {
     T1 = var_h + USIG1(var_e) + CH(var_e, var_f, var_g) + K[t] + W[t];
     T2 = USIG0(var_a) + MAJ(var_a, var_b, var_c);
     var_h = var_g;
