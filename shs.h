@@ -69,4 +69,52 @@ int sha512_load(Sha512 *sha, const unsigned char data[],
                 const unsigned int len);
 int sha512_hash(Sha512 *sha);
 
+/*------------------------------*/
+/* SHA-384                      */
+/*------------------------------*/
+typedef struct _Sha384 Sha384;
+struct _Sha384 {
+  unsigned char msg_block[128];  // 1024 bit block (8 bit bytes)
+  unsigned long long byte_idx;
+  unsigned long long bit_cnt[2];     // 128 bit
+  unsigned long long msg_digest[8];  // 384 bits after truncation (64 bit words)
+};
+
+Sha384 *sha384_new();
+int sha384_load(Sha384 *sha, const unsigned char data[],
+                const unsigned int len);
+int sha384_hash(Sha384 *sha);
+
+/*------------------------------*/
+/* SHA-512/224                  */
+/*------------------------------*/
+typedef struct _Sha512_224 Sha512_224;
+struct _Sha512_224 {
+  unsigned char msg_block[128];  // 1024 bit block (8 bit bytes)
+  unsigned long long byte_idx;
+  unsigned long long bit_cnt[2];     // 128 bit
+  unsigned long long msg_digest[8];  // 224 bits after truncation (64 bit words)
+};
+
+Sha512_224 *sha512_224_new();
+int sha512_224_load(Sha512_224 *sha, const unsigned char data[],
+                const unsigned int len);
+int sha512_224_hash(Sha512_224 *sha);
+
+/*------------------------------*/
+/* SHA-512/256                  */
+/*------------------------------*/
+typedef struct _Sha512_256 Sha512_256;
+struct _Sha512_256 {
+  unsigned char msg_block[128];  // 1024 bit block (8 bit bytes)
+  unsigned long long byte_idx;
+  unsigned long long bit_cnt[2];     // 128 bit
+  unsigned long long msg_digest[8];  // 224 bits after truncation (64 bit words)
+};
+
+Sha512_256 *sha512_256_new();
+int sha512_256_load(Sha512_256 *sha, const unsigned char data[],
+                    const unsigned int len);
+int sha512_256_hash(Sha512_256 *sha);
+
 #endif /* _SHS_LIB_H_ */
