@@ -1,6 +1,6 @@
 # Secure Hash
 
-Implementation of Selected Algorithms of the Secure Hash Standard
+My naive implementations of selected algorithms from the NIST Secure Hash Standard.
 
 # 180-4 Specification
 
